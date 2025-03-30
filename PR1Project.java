@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.*; 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,7 +26,6 @@ class Song {
         return playCount;
     }
 
-    // Set a new global play count
     public void setPlayCount(int newPlayCount) {
         this.playCount = newPlayCount;
     }
@@ -36,12 +35,11 @@ class Song {
         return title + " by " + artist + " | Streams: " + playCount;
     }
 
-    // Convert song to a string representation for file storage
     public String toFileString() {
         return artist + "," + title + "," + playCount;
     }
 
-    // Static method to create a song from a file line
+    
     public static Song fromFileString(String line) {
         String[] parts = line.split(",");
         return new Song(parts[0], parts[1], Integer.parseInt(parts[2]));
@@ -58,7 +56,6 @@ public class PR1Project {
         loadSongsFromFile();
     }
 
-    // Load songs from file
     private void loadSongsFromFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
@@ -70,7 +67,6 @@ public class PR1Project {
         }
     }
 
-    // Save songs to a file
     private void saveSongsToFile() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Song song : songs) {
@@ -82,22 +78,19 @@ public class PR1Project {
         }
     }
 
-    // Add a new song with global play count
     public void addSong(String artist, String title, int playCount) {
         Song newSong = new Song(artist, title, playCount);
         songs.add(newSong);
-        saveSongsToFile(); // Save the updated list to file
+        saveSongsToFile(); 
         System.out.println("Added: " + title + " by " + artist + " with " + playCount + " global plays.");
     }
 
-    // Remove a song from the list
     public void removeSong(String title) {
         songs.removeIf(song -> song.getTitle().equalsIgnoreCase(title));
-        saveSongsToFile(); // Save the updated list to file
+        saveSongsToFile(); 
         System.out.println("Removed: " + title);
     }
 
-    // Print all songs
     public void printAllSongs() {
         if (songs.isEmpty()) {
             System.out.println("No songs available.");
@@ -109,7 +102,6 @@ public class PR1Project {
         }
     }
 
-    // Print songs that have more plays than a given number
     public void printSongsAbovePlayCount(int playCount) {
         boolean found = false;
         System.out.println("\nSongs with more than " + playCount + " plays:");
@@ -124,12 +116,11 @@ public class PR1Project {
         }
     }
 
-    // Update the global play count of a song
     public void updateStreams(String title, int newPlayCount) {
         for (Song song : songs) {
             if (song.getTitle().equalsIgnoreCase(title)) {
                 song.setPlayCount(newPlayCount);
-                saveSongsToFile(); // Save the updated list to file
+                saveSongsToFile(); 
                 System.out.println("Updated the play count for " + title + " to " + newPlayCount + " plays.");
                 return;
             }
@@ -188,7 +179,7 @@ public class PR1Project {
                     String songToUpdate = scanner.nextLine();
                     System.out.print("Enter the new global play count: ");
                     int newPlayCount = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine(); 
                     app.updateStreams(songToUpdate, newPlayCount);
                     break;
 
